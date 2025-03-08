@@ -68,14 +68,10 @@ const NewsGrid = () => {
   return (
     <>
       <Container size="lg">
-        <SimpleGrid cols={3}>
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }}>
           {feeds.map((feed, index) => (
             <div key={index}>
               <Text ta="left" size="lg" fw={900} tt="capitalize">{new URL(feed.url).pathname.split('/')[2]}</Text>
-              {/* <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
-                {JSON.stringify(feed.data, null, 2)}
-              </pre> */}
-
               <Card withBorder shadow="sm" radius="md">
                 <ScrollArea h={250} scrollbarSize={8} offsetScrollbars scrollbars="y">
                   <List size="xs">
@@ -84,7 +80,7 @@ const NewsGrid = () => {
                         <Tooltip label={item.published}>
                           <Text size="sm" fw={700}>{item.title}</Text>
                         </Tooltip>
-                        <Divider my="xs" label={item.categories[1]} labelPosition="left" />
+                        <Divider my="xs" label={item.origin.title+' | '+item.categories[1]} labelPosition="left" />
                       </List.Item>
                     ))}
                   </List>
