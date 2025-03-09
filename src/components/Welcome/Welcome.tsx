@@ -5,9 +5,9 @@ export function Welcome() {
   return (
     <>
       <Title className={classes.title} ta="center" mt={100}>
-        به{' '}
+        به
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
-          خبرگزاری شخصی خودتان{' '}
+        {' '}خبرگزاری شخصی خودتان{' '}
         </Text>
         خوش آمدید.
       </Title>
