@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IconBlockquote, IconBuildingBroadcastTower, IconInfoCircle } from '@tabler/icons-react';
 import axios from 'axios';
+import Markdown from 'react-markdown';
 import {
   Blockquote,
   Card,
@@ -121,13 +122,13 @@ const NewsGrid = () => {
               p="xs"
             >
               <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
-                {feed.newsletterData.body}
+                <Markdown>{feed.newsletterData.body}</Markdown>
               </ScrollArea>
             </Blockquote>
 
             <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
               <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
-                {feed.newsletterData.podcast}
+                <Markdown>{feed.newsletterData.podcast}</Markdown>
               </ScrollArea>
             </Blockquote>
 
