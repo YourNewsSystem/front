@@ -1,8 +1,7 @@
 {
-  "name": "mantine-vite-template",
+  "name": "your-news-front",
   "private": true,
-  "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -20,6 +19,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@fontsource/vazirmatn": "^5.2.5",
     "@mantine/core": "7.17.1",
     "@mantine/hooks": "7.17.1",
     "@tabler/icons-react": "^3.31.0",
