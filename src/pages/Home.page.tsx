@@ -6,7 +6,7 @@ export function HomePage() {
   return (
     <>
       <Welcome />
-      <Container>
+      <Container size="lg">
         <NewsGrid />
       </Container>
     </>
