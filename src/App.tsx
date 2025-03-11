@@ -7,7 +7,7 @@ import { theme } from './theme';
 
 export default function App() {
   return (
-    <DirectionProvider initialDirection='rtl'>
+    <DirectionProvider initialDirection="rtl">
       <MantineProvider theme={theme}>
         <Router />
       </MantineProvider>
