@@ -1,13 +1,16 @@
 import '@mantine/core/styles.css';
-import "@fontsource/vazirmatn"; 
-import { MantineProvider } from '@mantine/core';
+import '@fontsource/vazirmatn';
+
+import { DirectionProvider, MantineProvider } from '@mantine/core';
 import { Router } from './Router';
 import { theme } from './theme';
 
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
-      <Router />
-    </MantineProvider>
+    <DirectionProvider initialDirection='rtl'>
+      <MantineProvider theme={theme}>
+        <Router />
+      </MantineProvider>
+    </DirectionProvider>
   );
 }
