@@ -33,6 +33,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                   media={item.media[0].href}
                   origin={item.origin.title}
                   time={item.published}
+                  cat={item.categories[1]}
                 />
               </Grid.Col>
             </>

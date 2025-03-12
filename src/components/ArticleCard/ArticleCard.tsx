@@ -11,6 +11,7 @@ interface ArticleCardProps {
   media: string;
   origin: string;
   time: number;
+  cat: string;
 }
 const ArticleCard = ({
   title = 'Default Title',
@@ -19,6 +20,7 @@ const ArticleCard = ({
   media = '',
   origin = '',
   time = 0,
+  cat=''
 }: ArticleCardProps) => {
   return (
     <Card withBorder radius="md" className={classes.card}>
@@ -47,7 +49,7 @@ const ArticleCard = ({
       <Group justify="space-between" className={classes.footer}>
         <Center>
           <Text fz="sm" fw="bolder" inline>
-            {origin}
+            {origin} | {cat}
           </Text>
         </Center>
         <ActionIcon.Group>
