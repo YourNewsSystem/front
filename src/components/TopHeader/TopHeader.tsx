@@ -143,8 +143,10 @@ export function TopHeader() {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">تلگرام</Button>
-            <Button>بله</Button>
+            <Button variant="filled">تلگرام</Button>
+            <Button variant="filled" color="teal">
+              بله
+            </Button>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
@@ -185,8 +187,10 @@ export function TopHeader() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">تلگرام</Button>
-            <Button>بله</Button>
+            <Button variant="filled">تلگرام</Button>
+            <Button variant="filled" color="teal">
+              بله
+            </Button>
           </Group>
         </ScrollArea>
       </Drawer>
