@@ -32,17 +32,17 @@ const ArticleCard = ({
           />
         </a>
       </Card.Section>
-        <Text
-          className={classes.title}
-          fw={500}
-          component="a"
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          lineClamp={2}
-        >
-          {title}
-        </Text>
+      <Text
+        className={classes.title}
+        fw={500}
+        component="a"
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        lineClamp={2}
+      >
+        {title}
+      </Text>
       <ScrollArea h={50} scrollbarSize={2} scrollHideDelay={0}>
         <Text fz="sm" c="dimmed" lineClamp={4}>
           {content}

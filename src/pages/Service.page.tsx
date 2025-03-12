@@ -57,7 +57,21 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
 
         {data.length === 0 && <div>No articles found</div>}
         <Grid>
-          {data.map((item) => (
+          {data.slice(0, 2).map((item) => (
+            <Grid.Col span={{ base: 6, md: 6, lg: 6 }} key={item.id}>
+              <ArticleImageCard
+                title={item.title}
+                id={item.id}
+                content={item.content}
+                link={item.link}
+                media={item.media?.[0]?.href}
+                origin={item.origin?.title}
+                published={item.published}
+                categories={getCategory(item.categories)}
+              />
+            </Grid.Col>
+          ))}
+          {data.slice(3, 7).map((item) => (
             <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
               <ArticleImageCard
                 title={item.title}
@@ -74,7 +88,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
 
           <Divider size="xl" mt="lg" mb="lg" />
 
-          {data.map((item) => (
+          {data.slice(7).map((item) => (
             <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={`card-${item.id}`}>
               <ArticleCard
                 title={item.title}

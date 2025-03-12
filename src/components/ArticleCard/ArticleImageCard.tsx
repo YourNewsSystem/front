@@ -1,5 +1,4 @@
-import { IconEye, IconMessageCircle } from '@tabler/icons-react';
-import { Card, Center, Group, Text, useMantineTheme } from '@mantine/core';
+import { Card, Center, Group, Text } from '@mantine/core';
 import classes from './ArticleImageCard.module.css';
 
 interface ArticleImageCardProps {
@@ -11,22 +10,22 @@ interface ArticleImageCardProps {
   origin?: string;
   published?: Date | number;
   categories?: string;
-  }
+}
 
 // const function ArticleImageCard() {
 //   const theme = useMantineTheme();
 
 //   return (
-    const ArticleImageCard = ({
-        title = 'تیتر',
-        content = 'خبر',
-        link = '#',
-        media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
-        origin = '',
-        published = 0,
-        categories = '',
-      }: ArticleImageCardProps) => {
-        return (
+const ArticleImageCard = ({
+  title = 'تیتر',
+  content = 'خبر',
+  link = '#',
+  media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
+  origin = '',
+  published = 0,
+  categories = '',
+}: ArticleImageCardProps) => {
+  return (
     <Card
       p="lg"
       shadow="lg"
@@ -74,6 +73,6 @@ interface ArticleImageCardProps {
       </div>
     </Card>
   );
-}
+};
 
 export default ArticleImageCard;
