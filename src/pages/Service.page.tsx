@@ -5,6 +5,7 @@ import { Container, Divider, Grid, Loader } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import  ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { TopWelcome } from '@/components/Welcome/Welcome';
+import { TopHeader } from '@/components/TopHeader/TopHeader';
 
 interface ServicePageProps {
   title: string;
@@ -20,6 +21,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
 
   return (
     <Container>
+      <TopHeader />
       <TopWelcome content={title} />
       {/* <Grid gutter="xs">
         <Grid.Col span={3}>
@@ -39,7 +41,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
         <Grid gutter="xs">
           {data.map((item: any) => (
             <>
-              <Grid.Col span={3} key={item.id}>
+              <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
                 <ArticleImageCard
                   title={item.title}
                   id={item.id}
@@ -64,7 +66,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
         <Grid gutter="xs">
           {data.map((item: any) => (
             <>
-              <Grid.Col span={3} key={item.id}>
+              <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
                 <ArticleCard
                   title={item.title}
                   id={item.id}

@@ -58,17 +58,17 @@ interface ArticleImageCardProps {
 
             <Group gap="lg">
               <Center>
-                <IconEye size={16} stroke={1.5} color='dark' />
+                {/* <IconEye size={16} stroke={1.5} color='dark' /> */}
                 <Text size="sm" className={classes.bodyText}>
-                  7847
+                  {cat}
                 </Text>
               </Center>
-              <Center>
+              {/* <Center>
                 <IconMessageCircle size={16} stroke={1.5} color='dark' />
                 <Text size="sm" className={classes.bodyText}>
                   5
                 </Text>
-              </Center>
+              </Center> */}
             </Group>
           </Group>
         </div>
