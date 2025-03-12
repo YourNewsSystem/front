@@ -84,22 +84,17 @@ const NewsGrid = () => {
       );
       setFeeds(results);
     };
-
     fetchAllFeeds();
   }, []);
   const summary_icon = <IconBlockquote stroke={1} />;
   const podcast_icon = <IconBuildingBroadcastTower stroke={1} />;
-
   return (
-    // <Container size="lg">
     <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} spacing="sm" verticalSpacing="xl">
       {feeds.map((feed, index) => (
         <div key={index}>
           <Text ta="left" size="lg" fw={900} tt="capitalize">
             {new URL(feed.mainUrl).pathname.split('/')[2]}
           </Text>
-
-          {/* Newsletter Section */}
           <Blockquote
             color="red"
             radius="xl"
@@ -114,17 +109,12 @@ const NewsGrid = () => {
             </ScrollArea>
             <time>{new Date(feed.newsletterData.created_at).toLocaleDateString()}</time>
           </Blockquote>
-
           <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
             <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
               <Markdown>{feed.newsletterData.podcast}</Markdown>
             </ScrollArea>
             <time>{new Date(feed.newsletterData.updated_at).toLocaleDateString()}</time>
           </Blockquote>
-
-          {/* Main Feed Section */}
-
-          {/* <Card withBorder shadow="sm" radius="md"> */}
           <ScrollArea h={250} scrollbarSize={8} offsetScrollbars scrollbars="y">
             <List size="xs">
               {typeof feed.mainData === 'string' ? (
@@ -147,11 +137,9 @@ const NewsGrid = () => {
               )}
             </List>
           </ScrollArea>
-          {/* </Card> */}
         </div>
       ))}
     </SimpleGrid>
-    // </Container>
   );
 };
 
