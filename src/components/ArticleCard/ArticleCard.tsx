@@ -1,5 +1,5 @@
 import { IconClock, IconHeart, IconShare } from '@tabler/icons-react';
-import { ActionIcon, Card, Center, Group, Image, ScrollArea, Text, Title } from '@mantine/core';
+import { ActionIcon, Card, Center, Group, Image, ScrollArea, Text } from '@mantine/core';
 import classes from './ArticleCard.module.css';
 
 interface ArticleCardProps {
@@ -41,13 +41,11 @@ const ArticleCard = ({
           href={link}
           target="_blank"
           rel="noopener noreferrer"
+          lineClamp={2}
         >
           {title}
         </Text>
       </ScrollArea>
-      <Title order={3} textWrap="wrap">
-        {title}
-      </Title>
       <ScrollArea h={50} scrollbarSize={2} scrollHideDelay={0}>
         <Text fz="sm" c="dimmed" lineClamp={4}>
           {content}
