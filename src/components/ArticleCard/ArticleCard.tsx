@@ -24,7 +24,11 @@ const ArticleCard = ({
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          <Image src={media} height={180} />
+          <Image 
+          src={media} 
+          height={180}
+          fallbackSrc="https://placehold.co/180x100?text=YourNews"
+          />
         </a>
       </Card.Section>
       <Text
