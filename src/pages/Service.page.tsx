@@ -20,23 +20,22 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
   }, [fetchData]);
 
   return (
-    <Container>
-      <TopHeader />
+    <><TopHeader /><Container>
       <TopWelcome content={title} />
       {/* <Grid gutter="xs">
-        <Grid.Col span={3}>
-          <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-        </Grid.Col>
-        <Grid.Col span={3}>
-          <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-        </Grid.Col>
-        <Grid.Col span={3}>
-          <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-        </Grid.Col>
-        <Grid.Col span={3}>
-          <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-        </Grid.Col>
-      </Grid> */}
+      <Grid.Col span={3}>
+        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
+      </Grid.Col>
+      <Grid.Col span={3}>
+        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
+      </Grid.Col>
+      <Grid.Col span={3}>
+        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
+      </Grid.Col>
+      <Grid.Col span={3}>
+        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
+      </Grid.Col>
+    </Grid> */}
       {data ? (
         <Grid gutter="xs">
           {data.map((item: any) => (
@@ -50,8 +49,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                   media={item.media[0].href}
                   origin={item.origin.title}
                   time={item.published}
-                  cat={item.categories[1]}
-                />
+                  cat={item.categories[1]} />
               </Grid.Col>
             </>
           ))}
@@ -60,7 +58,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
         <Loader color="red" size="sm" type="bars" />
       )}
 
-      <Divider size='xl' mt='lg' mb='lg'/>
+      <Divider size='xl' mt='lg' mb='lg' />
 
       {data ? (
         <Grid gutter="xs">
@@ -75,8 +73,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                   media={item.media[0].href}
                   origin={item.origin.title}
                   time={item.published}
-                  cat={item.categories[1]}
-                />
+                  cat={item.categories[1]} />
               </Grid.Col>
             </>
           ))}
@@ -84,7 +81,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
       ) : (
         <Loader color="red" size="sm" type="bars" />
       )}
-    </Container>
+    </Container></>
   );
 };
 

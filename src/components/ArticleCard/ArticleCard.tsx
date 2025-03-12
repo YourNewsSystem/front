@@ -17,7 +17,7 @@ const ArticleCard = ({
   title = 'تیتر',
   content = 'خبر',
   link = '#',
-  media = '',
+  media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
   origin = '',
   time = 0,
   cat = '',
