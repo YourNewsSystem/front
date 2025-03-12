@@ -1,7 +1,7 @@
 // src/components/ServicePage/ServicePage.tsx
 
 import React from 'react';
-import { Container, Grid } from '@mantine/core';
+import { Container, Grid, Loader } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import { TopWelcome } from '@/components/Welcome/Welcome';
 
@@ -24,7 +24,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
         <Grid gutter="xs">
           {data.map((item: any) => (
             <>
-              <Grid.Col span={4} key={item.id}>
+              <Grid.Col span={3} key={item.id}>
                 <ArticleCard
                   title={item.title}
                   id={item.id}
@@ -40,7 +40,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
           ))}
         </Grid>
       ) : (
-        <p>Loading...</p>
+        <Loader color="red" size="sm" type="bars" />
       )}
     </Container>
   );

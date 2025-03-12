@@ -33,7 +33,6 @@ const ArticleCard = ({
           />
         </a>
       </Card.Section>
-      <ScrollArea h={20} scrollbarSize={2} scrollHideDelay={0}>
         <Text
           className={classes.title}
           fw={500}
@@ -45,13 +44,11 @@ const ArticleCard = ({
         >
           {title}
         </Text>
-      </ScrollArea>
       <ScrollArea h={50} scrollbarSize={2} scrollHideDelay={0}>
         <Text fz="sm" c="dimmed" lineClamp={4}>
           {content}
         </Text>
       </ScrollArea>
-
       <Group justify="space-between" className={classes.footer}>
         <Center>
           <Text fz="sm" fw="bolder" inline>
