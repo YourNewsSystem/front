@@ -52,7 +52,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
   return (
     <>
       <TopHeader />
-      <Container>
+      <Container fluid>
         <TopWelcome content={title} />
 
         {data.length === 0 && <div>No articles found</div>}
@@ -88,7 +88,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
 
           <Divider size="xl" mt="lg" mb="lg" />
 
-          {data.slice(7).map((item) => (
+          {data.slice(8).map((item) => (
             <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={`card-${item.id}`}>
               <ArticleCard
                 title={item.title}
