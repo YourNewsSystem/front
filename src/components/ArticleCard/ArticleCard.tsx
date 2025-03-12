@@ -3,15 +3,14 @@ import { ActionIcon, Card, Center, Group, Image, ScrollArea, Text } from '@manti
 import classes from './ArticleCard.module.css';
 
 interface ArticleCardProps {
-  message?: string;
-  title: string;
   id: string;
+  title: string;
   content: string;
   link: string;
-  media: string;
-  origin: string;
-  time: number;
-  cat: string;
+  media?: string;
+  origin?: string;
+  published?: Date | number;
+  categories?: string;
 }
 const ArticleCard = ({
   title = 'تیتر',
@@ -19,8 +18,8 @@ const ArticleCard = ({
   link = '#',
   media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
   origin = '',
-  time = 0,
-  cat = '',
+  published = 0,
+  categories = '',
 }: ArticleCardProps) => {
   return (
     <Card withBorder radius="md" className={classes.card}>
@@ -52,7 +51,7 @@ const ArticleCard = ({
       <Group justify="space-between" className={classes.footer}>
         <Center>
           <Text fz="sm" fw="bolder" inline>
-            {origin} | {cat}
+            {origin} | {categories}
           </Text>
         </Center>
         <ActionIcon.Group>
@@ -65,7 +64,7 @@ const ArticleCard = ({
             bg="var(--mantine-color-body)"
             miw={60}
           >
-            {time}
+            {published.toLocaleString()}
             <IconClock size={16} />
           </ActionIcon.GroupSection>
           <ActionIcon variant="default" size="xs" radius="md">

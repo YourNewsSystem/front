@@ -3,15 +3,14 @@ import { Card, Center, Group, Text, useMantineTheme } from '@mantine/core';
 import classes from './ArticleImageCard.module.css';
 
 interface ArticleImageCardProps {
-    message?: string;
-    title: string;
-    id: string;
-    content: string;
-    link: string;
-    media: string;
-    origin: string;
-    time: number;
-    cat: string;
+  id: string;
+  title: string;
+  content: string;
+  link: string;
+  media?: string;
+  origin?: string;
+  published?: Date | number;
+  categories?: string;
   }
 
 // const function ArticleImageCard() {
@@ -24,8 +23,8 @@ interface ArticleImageCardProps {
         link = '#',
         media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
         origin = '',
-        time = 0,
-        cat = '',
+        published = 0,
+        categories = '',
       }: ArticleImageCardProps) => {
         return (
     <Card
@@ -60,7 +59,7 @@ interface ArticleImageCardProps {
               <Center>
                 {/* <IconEye size={16} stroke={1.5} color='dark' /> */}
                 <Text size="sm" className={classes.bodyText}>
-                  {cat}
+                  {categories}
                 </Text>
               </Center>
               {/* <Center>

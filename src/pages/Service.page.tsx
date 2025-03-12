@@ -1,87 +1,96 @@
 // src/components/ServicePage/ServicePage.tsx
-
 import React from 'react';
 import { Container, Divider, Grid, Loader } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
-import  ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
-import { TopWelcome } from '@/components/Welcome/Welcome';
+import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
+import { TopWelcome } from '@/components/Welcome/Welcome';
+
+interface ServiceItem {
+  id: string;
+  title: string;
+  content: string;
+  link: string;
+  media?: Array<{ href: string }>;
+  origin?: { title: string };
+  published?: Date | number;
+  categories?: Array<string>;
+}
 
 interface ServicePageProps {
   title: string;
-  fetchData: () => Promise<any>;
+  fetchData: () => Promise<Array<ServiceItem>>;
 }
 
 const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
-  const [data, setData] = React.useState<any>(null);
+  const [data, setData] = React.useState<Array<ServiceItem>>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    fetchData().then(setData);
+    const loadData = async () => {
+      try {
+        const result = await fetchData();
+        setData(result || []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
   }, [fetchData]);
 
+  if (loading) return <Loader color="red" size="sm" type="bars" />;
+  if (error) return <div className="text-red-500">{error}</div>;
+
+  const getCategory = (categories: Array<string> | undefined): string => {
+    return categories?.[1] ?? 'Uncategorized';
+  };
+
   return (
-    <><TopHeader /><Container>
-      <TopWelcome content={title} />
-      {/* <Grid gutter="xs">
-      <Grid.Col span={3}>
-        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-      </Grid.Col>
-      <Grid.Col span={3}>
-        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-      </Grid.Col>
-      <Grid.Col span={3}>
-        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-      </Grid.Col>
-      <Grid.Col span={3}>
-        <ArticleImageCard title={''} id={''} content={''} link={''} media={''} origin={''} time={0} cat={''} />
-      </Grid.Col>
-    </Grid> */}
-      {data ? (
-        <Grid gutter="xs">
-          {data.map((item: any) => (
-            <>
-              <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
-                <ArticleImageCard
-                  title={item.title}
-                  id={item.id}
-                  content={item.content}
-                  link={item.link}
-                  media={item.media[0].href}
-                  origin={item.origin.title}
-                  time={item.published}
-                  cat={item.categories[1]} />
-              </Grid.Col>
-            </>
+    <>
+      <TopHeader />
+      <Container>
+        <TopWelcome content={title} />
+
+        {data.length === 0 && <div>No articles found</div>}
+        <Grid>
+          {data.map((item) => (
+            <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
+              <ArticleImageCard
+                title={item.title}
+                id={item.id}
+                content={item.content}
+                link={item.link}
+                media={item.media?.[0]?.href}
+                origin={item.origin?.title}
+                published={item.published}
+                categories={getCategory(item.categories)}
+              />
+            </Grid.Col>
+          ))}
+
+          <Divider size="xl" mt="lg" mb="lg" />
+
+          {data.map((item) => (
+            <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={`card-${item.id}`}>
+              <ArticleCard
+                title={item.title}
+                id={item.id}
+                content={item.content}
+                link={item.link}
+                media={item.media?.[0]?.href}
+                origin={item.origin?.title}
+                published={item.published}
+                categories={getCategory(item.categories)}
+              />
+            </Grid.Col>
           ))}
         </Grid>
-      ) : (
-        <Loader color="red" size="sm" type="bars" />
-      )}
-
-      <Divider size='xl' mt='lg' mb='lg' />
-
-      {data ? (
-        <Grid gutter="xs">
-          {data.map((item: any) => (
-            <>
-              <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={item.id}>
-                <ArticleCard
-                  title={item.title}
-                  id={item.id}
-                  content={item.content}
-                  link={item.link}
-                  media={item.media[0].href}
-                  origin={item.origin.title}
-                  time={item.published}
-                  cat={item.categories[1]} />
-              </Grid.Col>
-            </>
-          ))}
-        </Grid>
-      ) : (
-        <Loader color="red" size="sm" type="bars" />
-      )}
-    </Container></>
+      </Container>
+    </>
   );
 };
 
