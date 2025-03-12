@@ -1,5 +1,5 @@
 import { IconClock, IconHeart, IconShare } from '@tabler/icons-react';
-import { ActionIcon, Card, Center, Group, Image, Text } from '@mantine/core';
+import { ActionIcon, Card, Center, Group, Image, ScrollArea, Text } from '@mantine/core';
 import classes from './ArticleCard.module.css';
 
 interface ArticleCardProps {
@@ -20,16 +20,16 @@ const ArticleCard = ({
   media = '',
   origin = '',
   time = 0,
-  cat=''
+  cat = '',
 }: ArticleCardProps) => {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          <Image 
-          src={media} 
-          height={180}
-          fallbackSrc="https://placehold.co/180x100/ccc/F00?text=Your+News"
+          <Image
+            src={media}
+            height={180}
+            fallbackSrc="https://placehold.co/180x100/ccc/F00?text=Your+News"
           />
         </a>
       </Card.Section>
@@ -43,9 +43,12 @@ const ArticleCard = ({
       >
         {title}
       </Text>
-      <Text fz="sm" c="dimmed" lineClamp={4}>
-        {content}
-      </Text>
+      <ScrollArea h={50} scrollbarSize={2} scrollHideDelay={0}>
+        <Text fz="sm" c="dimmed" lineClamp={4}>
+          {content}
+        </Text>
+      </ScrollArea>
+
       <Group justify="space-between" className={classes.footer}>
         <Center>
           <Text fz="sm" fw="bolder" inline>
