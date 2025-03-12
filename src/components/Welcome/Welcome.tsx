@@ -4,7 +4,7 @@ import classes from './Welcome.module.css';
 export function Welcome() {
   return (
     <>
-      <Title className={classes.title} ta="center" mt={100}>
+      <Title className={classes.title} ta="center" mt={10} mb={20}>
         به
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
           {' '}
@@ -19,7 +19,7 @@ export function Welcome() {
 export function PodcastWelcome() {
   return (
     <>
-      <Title className={classes.title} ta="center" mt={100}>
+      <Title className={classes.title} ta="center" mt={10} mb={20}>
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
           پادکست‌های خبری
         </Text>
@@ -31,7 +31,7 @@ export function PodcastWelcome() {
 export function NewsletterWelcome() {
   return (
     <>
-      <Title className={classes.title} ta="center" mt={100}>
+      <Title className={classes.title} ta="center" mt={10} mb={20}>
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
           گزارش‌های خبری
         </Text>

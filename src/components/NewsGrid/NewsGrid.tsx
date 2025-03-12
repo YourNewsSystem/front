@@ -139,7 +139,7 @@ const NewsGrid = () => {
                     </Tooltip>
                     <Divider
                       my="xs"
-                      label={item.origin.title + ' | ' + item.categories[1]}
+                      label={`${item.origin.title} | ${item.categories[1]}`}
                       labelPosition="left"
                     />
                   </List.Item>

@@ -85,7 +85,7 @@ export function TopHeader() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box pb={10}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           <Image src="https://raw.githubusercontent.com/YourNewsSystem/front/refs/heads/master/src/favicon-32x32.png" />
