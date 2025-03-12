@@ -1,12 +1,12 @@
 import { Container } from '@mantine/core';
 import PodcastsGrid from '@/components/PodcastsGrid/PodcastsGrid';
-import { TopIcons } from '@/components/TopIcons/TopIcons';
+import { TopHeader } from '@/components/TopHeader/TopHeader';
 import { PodcastWelcome } from '@/components/Welcome/Welcome';
 
 export function PodcastPage() {
   return (
     <>
-      <TopIcons />
+      <TopHeader />
       <PodcastWelcome />
       <Container size="lg">
         <PodcastsGrid />
