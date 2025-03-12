@@ -134,10 +134,10 @@ export function TopHeader() {
                   </div> */}
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="#/newsletter" className={classes.link}>
+            <a href="#/newsletters" className={classes.link}>
               تحلیل
             </a>
-            <a href="#/podcast" className={classes.link}>
+            <a href="#/podcasts" className={classes.link}>
               پادکست
             </a>
           </Group>
@@ -177,10 +177,10 @@ export function TopHeader() {
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#/newsletter" className={classes.link}>
+          <a href="#/newsletters" className={classes.link}>
             تحلیل
           </a>
-          <a href="#/podcast" className={classes.link}>
+          <a href="#/podcasts" className={classes.link}>
             پادکست
           </a>
 
