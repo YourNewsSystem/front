@@ -34,7 +34,7 @@ const router = createHashRouter([
     element: <Culture />,
   },
   {
-    path: '/service/ثconomy',
+    path: '/service/economy',
     element: <Economy />,
   },
 ]);
