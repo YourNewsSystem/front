@@ -16,7 +16,7 @@ const ArticleCard = ({
   title = 'تیتر',
   content = 'خبر',
   link = '#',
-  media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
+  media = 'https://placehold.co/180x100/ccc/F00?text=Your\nNews&font=oswald',
   origin = '',
   published = 0,
   categories = '',
@@ -28,7 +28,7 @@ const ArticleCard = ({
           <Image
             src={media}
             height={180}
-            fallbackSrc="https://placehold.co/180x100/ccc/F00?text=Your+News"
+            fallbackSrc="https://placehold.co/180x100/ccc/F00?text=Your\nNews&font=oswald"
           />
         </a>
       </Card.Section>

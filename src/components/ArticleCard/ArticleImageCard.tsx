@@ -20,7 +20,7 @@ const ArticleImageCard = ({
   title = 'تیتر',
   content = 'خبر',
   link = '#',
-  media = 'https://placehold.co/180x100/ccc/F00?text=Your+News',
+  media = 'https://placehold.co/180x100/ccc/F00?text=Your\nNews&font=oswald',
   origin = '',
   published = 0,
   categories = '',
@@ -32,7 +32,7 @@ const ArticleImageCard = ({
       className={classes.card}
       radius="md"
       component="a"
-      href="https://mantine.dev/"
+      href="https://yournews.j-ai.ir/"
       target="_blank"
     >
       <div
