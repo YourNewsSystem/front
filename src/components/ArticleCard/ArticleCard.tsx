@@ -1,26 +1,24 @@
-import { IconClock, IconHeart, IconShare } from '@tabler/icons-react';
+import { IconClock, IconShare } from '@tabler/icons-react';
+import moment from 'moment-jalaali';
 import { ActionIcon, Card, Center, Group, Image, ScrollArea, Text } from '@mantine/core';
+import ArticleCardProps from '../../types/ArticleCardProps';
 import classes from './ArticleCard.module.css';
 
-interface ArticleCardProps {
-  id: string;
-  title: string;
-  content: string;
-  link: string;
-  media?: string;
-  origin?: string;
-  published?: Date | number;
-  categories?: string;
-}
 const ArticleCard = ({
   title = 'تیتر',
   content = 'خبر',
   link = '#',
   media = 'https://placehold.co/180x100/ccc/F00?text=Your\nNews&font=oswald',
   origin = '',
-  published = 0,
   categories = '',
+  crawlTimeMsec = '',
 }: ArticleCardProps) => {
+  const convertTimestamp = (timestamp: string | undefined): number | null => {
+    if (!timestamp) return null;
+    const numValue = parseInt(timestamp);
+    return isNaN(numValue) ? null : numValue;
+  };
+  const processedCrawlTime = convertTimestamp(crawlTimeMsec);
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section>
@@ -55,16 +53,13 @@ const ArticleCard = ({
           </Text>
         </Center>
         <ActionIcon.Group>
-          <ActionIcon variant="default" size="xs" radius="md">
-            <IconHeart size={16} color="red" />
-          </ActionIcon>
           <ActionIcon.GroupSection
             variant="default"
             size="xs"
             bg="var(--mantine-color-body)"
             miw={60}
           >
-            {published.toLocaleString()}
+            {moment(processedCrawlTime).format('jYYYY/jM/jD')}
             <IconClock size={16} />
           </ActionIcon.GroupSection>
           <ActionIcon variant="default" size="xs" radius="md">

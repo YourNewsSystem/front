@@ -1,30 +1,24 @@
+import { IconMessageCircle } from '@tabler/icons-react';
+import moment from 'moment-jalaali';
 import { Card, Center, Group, Text } from '@mantine/core';
+import ArticleCardProps from '../../types/ArticleCardProps';
 import classes from './ArticleImageCard.module.css';
 
-interface ArticleImageCardProps {
-  id: string;
-  title: string;
-  content: string;
-  link: string;
-  media?: string;
-  origin?: string;
-  published?: Date | number;
-  categories?: string;
-}
-
-// const function ArticleImageCard() {
-//   const theme = useMantineTheme();
-
-//   return (
 const ArticleImageCard = ({
   title = 'تیتر',
   content = 'خبر',
   link = '#',
   media = 'https://placehold.co/180x100/ccc/F00?text=Your\nNews&font=oswald',
   origin = '',
-  published = 0,
+  crawlTimeMsec = '',
   categories = '',
-}: ArticleImageCardProps) => {
+}: ArticleCardProps) => {
+  const convertTimestamp = (timestamp: string | undefined): number | null => {
+    if (!timestamp) return null;
+    const numValue = parseInt(timestamp);
+    return isNaN(numValue) ? null : numValue;
+  };
+  const processedCrawlTime = convertTimestamp(crawlTimeMsec);
   return (
     <Card
       p="lg"
@@ -42,31 +36,27 @@ const ArticleImageCard = ({
         }}
       />
       <div className={classes.overlay} />
-
       <div className={classes.content}>
         <div>
           <Text size="lg" className={classes.title} fw={500}>
             {title}
           </Text>
-
           <Group justify="space-between" gap="xs">
             <Text size="sm" className={classes.author}>
               {origin}
             </Text>
-
             <Group gap="lg">
               <Center>
-                {/* <IconEye size={16} stroke={1.5} color='dark' /> */}
                 <Text size="sm" className={classes.bodyText}>
                   {categories}
                 </Text>
               </Center>
-              {/* <Center>
-                <IconMessageCircle size={16} stroke={1.5} color='dark' />
+              <Center>
+                <IconMessageCircle size={16} stroke={1.5} color="dark" />
                 <Text size="sm" className={classes.bodyText}>
-                  5
+                  {moment(processedCrawlTime).format('jYYYY/jM/jD')}
                 </Text>
-              </Center> */}
+              </Center>
             </Group>
           </Group>
         </div>

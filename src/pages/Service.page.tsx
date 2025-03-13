@@ -1,21 +1,9 @@
-// src/components/ServicePage/ServicePage.tsx
 import React from 'react';
 import { Container, Divider, Grid, Loader } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
 import { TopWelcome } from '@/components/Welcome/Welcome';
-
-interface ServiceItem {
-  id: string;
-  title: string;
-  content: string;
-  link: string;
-  media?: Array<{ href: string }>;
-  origin?: { title: string };
-  published?: Date | number;
-  categories?: Array<string>;
-}
 
 interface ServicePageProps {
   title: string;
@@ -66,7 +54,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                 link={item.link}
                 media={item.media?.[0]?.href}
                 origin={item.origin?.title}
-                published={item.published}
+                crawlTimeMsec={item.crawlTimeMsec}
                 categories={getCategory(item.categories)}
               />
             </Grid.Col>
@@ -80,7 +68,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                 link={item.link}
                 media={item.media?.[0]?.href}
                 origin={item.origin?.title}
-                published={item.published}
+                crawlTimeMsec={item.crawlTimeMsec}
                 categories={getCategory(item.categories)}
               />
             </Grid.Col>
@@ -97,8 +85,8 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
                 link={item.link}
                 media={item.media?.[0]?.href}
                 origin={item.origin?.title}
-                published={item.published}
                 categories={getCategory(item.categories)}
+                crawlTimeMsec={item.crawlTimeMsec}
               />
             </Grid.Col>
           ))}
