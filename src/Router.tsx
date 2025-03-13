@@ -37,6 +37,10 @@ const router = createHashRouter([
     path: '/service/economy',
     element: <Economy />,
   },
+  {
+    path: '/service/social',
+    element: <Economy />,
+  },
 ]);
 
 export function Router() {

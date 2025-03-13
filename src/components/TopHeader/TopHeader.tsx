@@ -33,31 +33,37 @@ const mockdata = [
     icon: IconBuildingPavilion,
     title: 'سیاست',
     description: ' ',
+    url: '#/service/politic',
   },
   {
     icon: IconBallBaseball,
     title: 'ورزش',
     description: ' ',
+    url: '#/service/sport',
   },
   {
     icon: IconWorld,
     title: 'جهان',
     description: ' ',
+    url: '#/service/world',
   },
   {
     icon: IconUsers,
     title: 'جامعه',
     description: ' ',
+    url: '#/service/social',
   },
   {
     icon: IconMasksTheater,
     title: 'فرهنگ',
     description: ' ',
+    url: '#/service/culture',
   },
   {
     icon: IconCoins,
     title: 'اقتصاد',
     description: ' ',
+    url: '#/service/economy',
   },
 ];
 
@@ -67,7 +73,7 @@ export function TopHeader() {
   const theme = useMantineTheme();
 
   const links = mockdata.map((item) => (
-    <UnstyledButton className={classes.subLink} key={item.title}>
+    <UnstyledButton className={classes.subLink} key={item.title} component="a" href={item.url}>
       <Group wrap="nowrap" align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
           <item.icon size={22} color={theme.colors.blue[6]} />

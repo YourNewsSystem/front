@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Divider, Grid, Loader } from '@mantine/core';
+import { Container, Divider, Grid, Loader, Stack } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
@@ -7,11 +7,14 @@ import { TopWelcome } from '@/components/Welcome/Welcome';
 
 interface ServicePageProps {
   title: string;
-  fetchData: () => Promise<Array<ServiceItem>>;
+  // fetchData: () => Promise<Array<ServiceItem>>;
+  fetchData: () => Promise<[Array<ServiceItem>, ServiceAI | null]>;
 }
 
 const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
   const [data, setData] = React.useState<Array<ServiceItem>>([]);
+  const [description, setDescription] = React.useState<ServiceAI | null>();
+
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -19,7 +22,11 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
     const loadData = async () => {
       try {
         const result = await fetchData();
-        setData(result || []);
+        const description = result[1];
+        const news = Array.isArray(result[0]) ? result[0] : [];
+        console.log(description);
+        setData(news as ServiceItem[]);
+        setDescription(description);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load data');
       } finally {
@@ -41,8 +48,14 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
     <>
       <TopHeader />
       <Container fluid>
-        <TopWelcome content={title} />
-
+        <Grid>
+          <Grid.Col span={{ base: 12, xs: 4 }}>
+            <Stack h={300} align="center" justify="center" gap="md">
+              <TopWelcome content={title} />
+            </Stack>
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, xs: 8 }}>{description?.body}</Grid.Col>
+        </Grid>
         {data.length === 0 && <div>No articles found</div>}
         <Grid>
           {data.slice(0, 2).map((item) => (
