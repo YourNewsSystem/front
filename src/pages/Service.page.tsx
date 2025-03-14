@@ -40,7 +40,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
   if (error) return <div className="text-red-500">{error}</div>;
 
   const getCategory = (categories: Array<string> | undefined): string => {
-    return categories?.[1] ?? 'Uncategorized';
+    return categories?.[1] ?? ' ';
   };
 
   return (
