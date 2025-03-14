@@ -5,8 +5,8 @@ import ServicePage from '@/pages/Service.page';
 const Politic: React.FC = () => {
   const cat = 'politic';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];
@@ -24,8 +24,8 @@ const Politic: React.FC = () => {
 const World: React.FC = () => {
   const cat = 'world';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];
@@ -43,8 +43,8 @@ const World: React.FC = () => {
 const Culture: React.FC = () => {
   const cat = 'culture';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];
@@ -62,8 +62,8 @@ const Culture: React.FC = () => {
 const Sport: React.FC = () => {
   const cat = 'sport';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];
@@ -79,8 +79,8 @@ const Sport: React.FC = () => {
 const Economy: React.FC = () => {
   const cat = 'economy';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];
@@ -98,8 +98,8 @@ const Economy: React.FC = () => {
 const Social: React.FC = () => {
   const cat = 'social';
   const fetchData = async (): Promise<[Array<ServiceItem>, ServiceAI | null]> => {
-    const response = await axios.get('https://rss.kermaneno.ir/yournews/' + cat + '/');
-    const description = await axios.get('https://yn.j-ai.ir/newsletter/latest/' + cat);
+    const response = await axios.get(`https://rss.kermaneno.ir/yournews/${cat}/`);
+    const description = await axios.get(`https://yn.j-ai.ir/newsletter/latest/${cat}`);
     const parsedResponse = Array.isArray(response.data)
       ? response.data.map((item) => ({ ...item, id: Date.now() })) // Add unique id to each item
       : [];

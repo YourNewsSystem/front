@@ -1,4 +1,5 @@
 import React from 'react';
+import Markdown from 'react-markdown';
 import { Container, Divider, Grid, Loader, Stack } from '@mantine/core';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
@@ -7,7 +8,6 @@ import { TopWelcome } from '@/components/Welcome/Welcome';
 
 interface ServicePageProps {
   title: string;
-  // fetchData: () => Promise<Array<ServiceItem>>;
   fetchData: () => Promise<[Array<ServiceItem>, ServiceAI | null]>;
 }
 
@@ -24,7 +24,6 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
         const result = await fetchData();
         const description = result[1];
         const news = Array.isArray(result[0]) ? result[0] : [];
-        console.log(description);
         setData(news as ServiceItem[]);
         setDescription(description);
       } catch (err) {
@@ -54,7 +53,9 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
               <TopWelcome content={title} />
             </Stack>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, xs: 8 }}>{description?.body}</Grid.Col>
+          <Grid.Col span={{ base: 12, xs: 8 }}>
+            <Markdown>{description?.body}</Markdown>
+          </Grid.Col>
         </Grid>
         {data.length === 0 && <div>No articles found</div>}
         <Grid>
