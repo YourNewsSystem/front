@@ -1,13 +1,18 @@
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-import { Culture, Economy, Politic, Sport, World } from './components/Service/Service';
+import { Culture, Economy, Politic, Social, Sport, World } from './components/Service/Service';
 import { HomePage } from './pages/Home.page';
 import { NewsletterPage } from './pages/Newsletter.page';
 import { PodcastPage } from './pages/Podcast.page';
+import { LandingPage } from './pages/Landing.page';
 
 const router = createHashRouter([
   {
     path: '/',
     element: <HomePage />,
+  },
+  {
+    path: '/landing',
+    element: <LandingPage />,
   },
   {
     path: '/podcasts',
@@ -39,7 +44,7 @@ const router = createHashRouter([
   },
   {
     path: '/service/social',
-    element: <Economy />,
+    element: <Social />,
   },
 ]);
 
