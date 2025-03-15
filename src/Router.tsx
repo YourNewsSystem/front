@@ -1,9 +1,9 @@
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { Culture, Economy, Politic, Social, Sport, World } from './components/Service/Service';
 import { HomePage } from './pages/Home.page';
+import { LandingPage } from './pages/Landing.page';
 import { NewsletterPage } from './pages/Newsletter.page';
 import { PodcastPage } from './pages/Podcast.page';
-import { LandingPage } from './pages/Landing.page';
 
 const router = createHashRouter([
   {

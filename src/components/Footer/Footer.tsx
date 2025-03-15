@@ -1,4 +1,11 @@
-import { IconBrandGithub, IconBrandInstagram, IconBrandTelegram, IconBrandTwitter, IconBrandYoutube, IconTicket } from '@tabler/icons-react';
+import {
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandTelegram,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconTicket,
+} from '@tabler/icons-react';
 import { ActionIcon, Container, Group, Image, Text } from '@mantine/core';
 import classes from './Footer.module.css';
 
@@ -16,7 +23,7 @@ const data = [
     links: [
       { label: 'منابع', link: '#' },
       { label: 'سرویس‌ها', link: '#' },
-      { label: 'حامیان', link: '#' },      
+      { label: 'حامیان', link: '#' },
     ],
   },
   {
@@ -56,9 +63,13 @@ export function Footer() {
       <Container className={classes.inner}>
         <div className={classes.logo}>
           {/* <MantineLogo size={30} /> */}
-          <Image src={'https://raw.githubusercontent.com/YourNewsSystem/front/refs/heads/master/src/android-chrome-192x192.png'}></Image>
+          <Image
+            src={
+              'https://raw.githubusercontent.com/YourNewsSystem/front/refs/heads/master/src/android-chrome-192x192.png'
+            }
+          ></Image>
           <Text size="xs" c="dimmed" className={classes.description}>
-          اینجا شما فقط مخاطب اخبار نیستید، اخبار برای شما آماده می‌شوند
+            اینجا شما فقط مخاطب اخبار نیستید، اخبار برای شما آماده می‌شوند
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>
