@@ -1,49 +1,74 @@
 import Markdown from 'react-markdown';
-import { Box, Container, Grid, List, Paper, SimpleGrid, Skeleton } from '@mantine/core';
-import { NewsCategory } from '@/Api/Api';
+import { Box, Container, Grid, List, Paper, SimpleGrid } from '@mantine/core';
+import { NewsCategory, NewsListProps } from '@/Api/Api';
+import ArticleCard from '@/components/ArticleCard/ArticleCard';
+import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { Footer } from '@/components/Footer/Footer';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
 import { TopWelcome } from '@/components/Welcome/Welcome';
 import { useNews } from '@/Hooks/UseNews';
 
-const PRIMARY_COL_HEIGHT = '300px';
-
+const getCategory = (categories: Array<string> | undefined): string => {
+  return categories?.[1] ?? ' ';
+};
 export function LandingPage() {
-  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
-  const STACK_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} * 3 + var(--mantine-spacing-md) * 3)`;
-
-  function NewsPage({ category }: { category: NewsCategory }) {
+  function NewsList({ category = 'politic', start = 0, end = 10, view = 'list' }: NewsListProps) {
     const { data, loading, error } = useNews(category);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error loading news</div>;
 
-    return (
-      <div>
-        <h1>{category.charAt(0).toUpperCase() + category.slice(1)} News</h1>
-        <div className="news-items">
-          {data.items.map((item) => (
-            <article key={item.id}>{item.title}</article>
-          ))}
-        </div>
-        {data.description && <section className="description">{data.description.podcast}</section>}
-      </div>
-    );
-  }
+    const items = data.items.slice(start, end);
 
-  function NewsList({ category }: { category: NewsCategory }) {
-    const { data, loading, error } = useNews(category);
+    switch (view) {
+      case 'card':
+        return (
+          <Grid>
+            {items.map((item) => (
+              <Grid.Col span={{ base: 6, md: 4, lg: 3 }} key={`card-${item.id}`}>
+                <ArticleCard
+                  title={item.title}
+                  id={item.id}
+                  content={item.content}
+                  link={item.link}
+                  media={item.media?.[0]?.href}
+                  origin={item.origin?.title}
+                  categories={getCategory(item.categories)}
+                  crawlTimeMsec={item.crawlTimeMsec}
+                />
+              </Grid.Col>
+            ))}
+          </Grid>
+        );
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading news</div>;
+      case 'image':
+        return (
+          <SimpleGrid>
+            {items.map((item) => (
+              <ArticleImageCard
+                key={item.id}
+                title={item.title}
+                id={item.id}
+                content={item.content}
+                link={item.link}
+                media={item.media?.[0]?.href}
+                origin={item.origin?.title}
+                crawlTimeMsec={item.crawlTimeMsec}
+                categories={getCategory(item.categories)}
+              />
+            ))}
+          </SimpleGrid>
+        );
 
-    return (
-      <List>
-        {data.items.map((item) => (
-          <List.Item key={item.id}>{item.title}</List.Item>
-        ))}
-      </List>
-    );
+      default:
+        return (
+          <List>
+            {items.map((item) => (
+              <List.Item key={item.id}>{item.title}</List.Item>
+            ))}
+          </List>
+        );
+    }
   }
 
   function NewsDesc({ category }: { category: NewsCategory }) {
@@ -61,19 +86,19 @@ export function LandingPage() {
       <Container fluid p={'sm'}>
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
-            <Paper shadow="xs" radius="xs" withBorder p="xl">
+            <Box>
               <TopWelcome content="سیاست" />
               <NewsDesc category="politic" />
-            </Paper>
+            </Box>
             <Grid gutter="md">
               <Grid.Col>
-                <NewsList category="politic" />
+                <NewsList category="politic" start={0} end={4} view="card" />
               </Grid.Col>
               <Grid.Col span={6}>
-                <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+                <NewsList category="politic" start={4} end={6} view="image" />
               </Grid.Col>
               <Grid.Col span={6}>
-                <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+                <NewsList category="politic" start={6} end={8} view="image" />
               </Grid.Col>
             </Grid>
           </SimpleGrid>
@@ -81,103 +106,113 @@ export function LandingPage() {
       </Container>
 
       <Container fluid mt={'md'}>
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <Grid gutter="md">
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col>
-              <NewsList category="culture" />
-            </Grid.Col>
-          </Grid>
-          <Box>
-            <TopWelcome content="فرهنگ" />
-            <NewsDesc category="culture" />
-          </Box>
-        </SimpleGrid>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+            <Grid gutter="md">
+              <Grid.Col span={6}>
+                <NewsList category="culture" start={4} end={6} view="image" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="culture" start={6} end={8} view="image" />
+              </Grid.Col>
+              <Grid.Col>
+                <NewsList category="culture" start={0} end={4} view="card" />
+              </Grid.Col>
+            </Grid>
+            <Box>
+              <TopWelcome content="فرهنگ" />
+              <NewsDesc category="culture" />
+            </Box>
+          </SimpleGrid>
+        </Paper>
       </Container>
 
       <Container fluid mt={'md'}>
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <Box>
-            <TopWelcome content="ورزش" />
-            <NewsDesc category="sport" />
-          </Box>
-          <Grid gutter="md">
-            <Grid.Col>
-              <NewsList category="sport" />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-          </Grid>
-        </SimpleGrid>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+            <Box>
+              <TopWelcome content="ورزش" />
+              <NewsDesc category="sport" />
+            </Box>
+            <Grid gutter="md">
+              <Grid.Col>
+                <NewsList category="sport" start={0} end={4} view="card" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="sport" start={4} end={6} view="image" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="sport" start={6} end={8} view="image" />
+              </Grid.Col>
+            </Grid>
+          </SimpleGrid>
+        </Paper>
       </Container>
 
       <Container fluid mt={'md'}>
-        <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
-          <Box>
-            <TopWelcome content="جامعه" />
-            <NewsDesc category="social" />
-          </Box>
-          <Grid gutter="md">
-            <Grid.Col>
-              <NewsList category="social" />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-          </Grid>
-        </SimpleGrid>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
+            <Box>
+              <TopWelcome content="جامعه" />
+              <NewsDesc category="social" />
+            </Box>
+            <Grid gutter="md">
+              <Grid.Col>
+                <NewsList category="social" start={0} end={4} view="card" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="social" start={4} end={6} view="image" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="social" start={6} end={8} view="image" />
+              </Grid.Col>
+            </Grid>
+          </SimpleGrid>
+        </Paper>
       </Container>
 
       <Container fluid mt={'md'}>
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <Grid gutter="md">
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col>
-              <NewsList category="economy" />
-            </Grid.Col>
-          </Grid>
-          <Box>
-            <TopWelcome content="اقتصاد" />
-            <NewsDesc category="economy" />
-          </Box>
-        </SimpleGrid>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+            <Grid gutter="md">
+              <Grid.Col span={6}>
+                <NewsList category="economy" start={4} end={6} view="image" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="economy" start={6} end={8} view="image" />
+              </Grid.Col>
+              <Grid.Col>
+                <NewsList category="economy" start={0} end={4} view="card" />
+              </Grid.Col>
+            </Grid>
+            <Box>
+              <TopWelcome content="اقتصاد" />
+              <NewsDesc category="economy" />
+            </Box>
+          </SimpleGrid>
+        </Paper>
       </Container>
 
       <Container fluid mt={'md'}>
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <Box>
-            <TopWelcome content="جهان" />
-            <NewsDesc category="world" />
-          </Box>
-          <Grid gutter="md">
-            <Grid.Col>
-              <NewsList category="world" />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-          </Grid>
-        </SimpleGrid>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+            <Box>
+              <TopWelcome content="جهان" />
+              <NewsDesc category="world" />
+            </Box>
+            <Grid gutter="md">
+              <Grid.Col>
+                <NewsList category="world" start={0} end={4} view="card" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="world" start={4} end={6} view="image" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <NewsList category="world" start={6} end={8} view="image" />
+              </Grid.Col>
+            </Grid>
+          </SimpleGrid>
+        </Paper>
       </Container>
       <Footer />
     </>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // Constants
@@ -6,6 +5,13 @@ const NEWS_CATEGORIES = ['social', 'economy', 'sport', 'culture', 'world', 'poli
 
 // Type for category
 export type NewsCategory = (typeof NEWS_CATEGORIES)[number];
+export type ViewMode = 'list' | 'card' | 'image';
+export interface NewsListProps {
+  category?: NewsCategory;
+  start?: number;
+  end?: number;
+  view: ViewMode;
+}
 
 // Service layer
 export class NewsService {
@@ -37,10 +43,8 @@ export class NewsService {
           : null;
 
       const result = { items, description };
-
       return result;
     } catch (error) {
-      console.error(`Error fetching data for category ${category}:`, error);
       throw new Error('Failed to fetch news data');
     }
   }
