@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown';
-import { Box, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
+import { Box, Container, Grid, List, Paper, SimpleGrid, Skeleton } from '@mantine/core';
 import { NewsCategory } from '@/Api/Api';
 import { Footer } from '@/components/Footer/Footer';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
@@ -31,6 +31,21 @@ export function LandingPage() {
     );
   }
 
+  function NewsList({ category }: { category: NewsCategory }) {
+    const { data, loading, error } = useNews(category);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error loading news</div>;
+
+    return (
+      <List>
+        {data.items.map((item) => (
+          <List.Item key={item.id}>{item.title}</List.Item>
+        ))}
+      </List>
+    );
+  }
+
   function NewsDesc({ category }: { category: NewsCategory }) {
     const { data, loading, error } = useNews(category);
 
@@ -43,24 +58,26 @@ export function LandingPage() {
   return (
     <>
       <TopHeader />
-      <Container fluid>
-        <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
-          <Box>
-            <TopWelcome content="سیاست" />
-            <NewsDesc category="politic" />
-          </Box>
-          <Grid gutter="md">
-            <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-            </Grid.Col>
-          </Grid>
-        </SimpleGrid>
+      <Container fluid p={'sm'}>
+        <Paper shadow="xl" radius="xs" p="xl">
+          <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
+            <Paper shadow="xs" radius="xs" withBorder p="xl">
+              <TopWelcome content="سیاست" />
+              <NewsDesc category="politic" />
+            </Paper>
+            <Grid gutter="md">
+              <Grid.Col>
+                <NewsList category="politic" />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              </Grid.Col>
+            </Grid>
+          </SimpleGrid>
+        </Paper>
       </Container>
 
       <Container fluid mt={'md'}>
@@ -73,7 +90,7 @@ export function LandingPage() {
               <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
             </Grid.Col>
             <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              <NewsList category="culture" />
             </Grid.Col>
           </Grid>
           <Box>
@@ -91,7 +108,7 @@ export function LandingPage() {
           </Box>
           <Grid gutter="md">
             <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              <NewsList category="sport" />
             </Grid.Col>
             <Grid.Col span={6}>
               <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
@@ -111,7 +128,7 @@ export function LandingPage() {
           </Box>
           <Grid gutter="md">
             <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              <NewsList category="social" />
             </Grid.Col>
             <Grid.Col span={6}>
               <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
@@ -133,7 +150,7 @@ export function LandingPage() {
               <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
             </Grid.Col>
             <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              <NewsList category="economy" />
             </Grid.Col>
           </Grid>
           <Box>
@@ -151,7 +168,7 @@ export function LandingPage() {
           </Box>
           <Grid gutter="md">
             <Grid.Col>
-              <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+              <NewsList category="world" />
             </Grid.Col>
             <Grid.Col span={6}>
               <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
