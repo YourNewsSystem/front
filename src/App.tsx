@@ -8,7 +8,7 @@ import { theme } from './theme';
 export default function App() {
   return (
     <DirectionProvider initialDirection="rtl">
-      <MantineProvider theme={theme}>
+      <MantineProvider theme={theme} forceColorScheme="light">
         <Router />
       </MantineProvider>
     </DirectionProvider>
