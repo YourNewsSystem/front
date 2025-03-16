@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconBlockquote, IconBuildingBroadcastTower } from '@tabler/icons-react';
 import axios from 'axios';
 import Markdown from 'react-markdown';
-import { Blockquote, Divider, List, ScrollArea, SimpleGrid, Text, Tooltip } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+import {
+  Blockquote,
+  Divider,
+  ScrollArea,
+  SimpleGrid,
+  Text,
+} from '@mantine/core';
+import ArticleImageCard from '../ArticleCard/ArticleImageCard';
+
+import '@mantine/carousel/styles.css';
 
 interface NewsItem {
   source: string;
@@ -88,58 +98,87 @@ const NewsGrid = () => {
   }, []);
   const summary_icon = <IconBlockquote stroke={1} />;
   const podcast_icon = <IconBuildingBroadcastTower stroke={1} />;
+  const getCategory = (categories: Array<string> | undefined): string => {
+    return categories?.[1] ?? ' ';
+  };
+  const slides = feeds.map((item, index) => (
+    <Carousel.Slide key={index}>
+      <Text ta="left" size="lg" fw={900} tt="capitalize">
+        {new URL(item.mainUrl).pathname.split('/')[2]}
+      </Text>
+      <Blockquote
+        color="red"
+        radius="xl"
+        iconSize={30}
+        cite="تحلیل"
+        icon={summary_icon}
+        mt="xs"
+        p="xs"
+      >
+        <ScrollArea h={400} scrollbarSize={8} scrollbars="y">
+          <Markdown>{item.newsletterData.body}</Markdown>
+        </ScrollArea>
+        <time>{new Date(item.newsletterData.created_at).toLocaleDateString()}</time>
+      </Blockquote>
+    </Carousel.Slide>
+  ));
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} spacing="sm" verticalSpacing="xl">
-      {feeds.map((feed, index) => (
-        <div key={index}>
-          <Text ta="left" size="lg" fw={900} tt="capitalize">
-            {new URL(feed.mainUrl).pathname.split('/')[2]}
-          </Text>
-          <Blockquote
-            color="red"
-            radius="xl"
-            iconSize={30}
-            cite="تحلیل"
-            icon={summary_icon}
-            mt="xs"
-            p="xs"
-          >
-            <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
-              <Markdown>{feed.newsletterData.body}</Markdown>
-            </ScrollArea>
-            <time>{new Date(feed.newsletterData.created_at).toLocaleDateString()}</time>
-          </Blockquote>
-          <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
-            <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
-              <Markdown>{feed.newsletterData.podcast}</Markdown>
-            </ScrollArea>
-            <time>{new Date(feed.newsletterData.updated_at).toLocaleDateString()}</time>
-          </Blockquote>
-          <ScrollArea h={250} scrollbarSize={8} offsetScrollbars scrollbars="y">
-            <List size="xs">
+    <>
+      <Carousel
+        slideSize="70%"
+        height={400}
+        slideGap="xl"
+        controlsOffset="xs"
+        controlSize={40}
+        loop
+        withIndicators
+      >
+        {slides}
+      </Carousel>
+      <Divider my="md" variant="dashed" />
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} spacing="sm" verticalSpacing="xl">
+        {feeds.map((feed, index) => (
+          <div key={index}>
+            <Text ta="left" size="lg" fw={900} tt="capitalize">
+              {new URL(feed.mainUrl).pathname.split('/')[2]}
+            </Text>
+            <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
+              <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
+                <Markdown>{feed.newsletterData.podcast}</Markdown>
+              </ScrollArea>
+              <time>{new Date(feed.newsletterData.updated_at).toLocaleDateString()}</time>
+            </Blockquote>
+            <Carousel
+              slideSize="70%"
+              height={300}
+              slideGap="xl"
+              controlsOffset="xs"
+              controlSize={40}
+              loop
+            >
               {typeof feed.mainData === 'string' ? (
                 <Text>{feed.mainData}</Text>
               ) : (
                 feed.mainData.map((item: NewsItem, index: number) => (
-                  <List.Item key={index}>
-                    <Tooltip label={item.published}>
-                      <Text size="sm" fw={700}>
-                        {item.title}
-                      </Text>
-                    </Tooltip>
-                    <Divider
-                      my="xs"
-                      label={`${item.origin.title} | ${item.categories[1]}`}
-                      labelPosition="left"
+                  <Carousel.Slide key={index}>
+                    <ArticleImageCard
+                      title={item.title}
+                      id={item.id}
+                      content={item.content}
+                      link={item.link}
+                      media={item.media?.[0]?.href}
+                      origin={item.origin?.title}
+                      crawlTimeMsec={item.crawlTimeMsec}
+                      categories={getCategory(item.categories)}
                     />
-                  </List.Item>
+                  </Carousel.Slide>
                 ))
               )}
-            </List>
-          </ScrollArea>
-        </div>
-      ))}
-    </SimpleGrid>
+            </Carousel>
+          </div>
+        ))}
+      </SimpleGrid>
+    </>
   );
 };
 
