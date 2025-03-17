@@ -132,6 +132,9 @@ export function TopHeader() {
             <Link to="/podcasts" className={classes.link}>
               پادکست
             </Link>
+            <Link to="/landing" className={classes.link}>
+              L
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">

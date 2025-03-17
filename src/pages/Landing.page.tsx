@@ -1,4 +1,5 @@
 import Markdown from 'react-markdown';
+import { Carousel } from '@mantine/carousel';
 import { Box, Container, Grid, List, Loader, Paper, SimpleGrid } from '@mantine/core';
 import { NewsCategory, NewsListProps } from '@/Api/Api';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
@@ -7,6 +8,8 @@ import { Footer } from '@/components/Footer/Footer';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
 import { TopWelcome } from '@/components/Welcome/Welcome';
 import { useNews } from '@/Hooks/UseNews';
+
+import '@mantine/carousel/styles.css';
 
 const getCategory = (categories: Array<string> | undefined): string => {
   return categories?.[1] ?? ' ';
@@ -65,6 +68,29 @@ export function LandingPage() {
           </SimpleGrid>
         );
 
+      case 'carouselcard':
+        return (
+          <>
+            {items.map((item, index) => (
+              <Carousel.Slide key={index}>
+                <ArticleImageCard
+                  key={item.id}
+                  title={item.title}
+                  id={item.id}
+                  content={item.content}
+                  link={item.link}
+                  media={item.media?.[0]?.href}
+                  origin={item.origin?.title}
+                  crawlTimeMsec={item.crawlTimeMsec}
+                  categories={getCategory(item.categories)}
+                />
+              </Carousel.Slide>
+            ))}
+          </>
+        );
+
+      //  <Carousel.Slide key={index}>
+
       default:
         return (
           <List>
@@ -102,7 +128,7 @@ export function LandingPage() {
             </Box>
             <Grid gutter="md">
               <Grid.Col>
-                <NewsList category="politic" start={0} end={4} view="card" />
+                <NewsList category="politic" start={0} end={4} view="carouselcard" />
               </Grid.Col>
               <Grid.Col span={6}>
                 <NewsList category="politic" start={4} end={6} view="image" />

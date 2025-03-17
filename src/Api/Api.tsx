@@ -7,7 +7,7 @@ const NEWS_CATEGORIES = ['social', 'economy', 'sport', 'culture', 'world', 'poli
 
 // Type for category
 export type NewsCategory = (typeof NEWS_CATEGORIES)[number];
-export type ViewMode = 'list' | 'card' | 'image';
+export type ViewMode = 'list' | 'card' | 'image' | 'carouselcard' | 'carouselimage';
 export interface NewsListProps {
   category?: NewsCategory;
   start?: number;

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { IconBlockquote, IconBuildingBroadcastTower } from '@tabler/icons-react';
 import axios from 'axios';
+import moment from 'moment-jalaali';
 import Markdown from 'react-markdown';
 import { Carousel } from '@mantine/carousel';
 import { Blockquote, Divider, ScrollArea, SimpleGrid, Text } from '@mantine/core';
 import ArticleImageCard from '../ArticleCard/ArticleImageCard';
 
 import '@mantine/carousel/styles.css';
-
-import moment from 'moment-jalaali';
 
 interface NewsItem {
   source: string;
@@ -147,34 +146,35 @@ const NewsGrid = () => {
               <ScrollArea h={150} scrollbarSize={8} scrollbars="y" type="always">
                 <Markdown>{feed.newsletterData.podcast}</Markdown>
               </ScrollArea>
+
+              <Carousel
+                slideSize="70%"
+                height={300}
+                slideGap="xl"
+                controlsOffset="xs"
+                controlSize={20}
+                loop
+              >
+                {typeof feed.mainData === 'string' ? (
+                  <Text>{feed.mainData}</Text>
+                ) : (
+                  feed.mainData.map((item: NewsItem, index: number) => (
+                    <Carousel.Slide key={index}>
+                      <ArticleImageCard
+                        title={item.title}
+                        id={item.id}
+                        content={item.content}
+                        link={item.link}
+                        media={item.media?.[0]?.href}
+                        origin={item.origin?.title}
+                        crawlTimeMsec={item.crawlTimeMsec}
+                        categories={getCategory(item.categories)}
+                      />
+                    </Carousel.Slide>
+                  ))
+                )}
+              </Carousel>
             </Blockquote>
-            <Carousel
-              slideSize="70%"
-              height={300}
-              slideGap="xl"
-              controlsOffset="xs"
-              controlSize={20}
-              loop
-            >
-              {typeof feed.mainData === 'string' ? (
-                <Text>{feed.mainData}</Text>
-              ) : (
-                feed.mainData.map((item: NewsItem, index: number) => (
-                  <Carousel.Slide key={index}>
-                    <ArticleImageCard
-                      title={item.title}
-                      id={item.id}
-                      content={item.content}
-                      link={item.link}
-                      media={item.media?.[0]?.href}
-                      origin={item.origin?.title}
-                      crawlTimeMsec={item.crawlTimeMsec}
-                      categories={getCategory(item.categories)}
-                    />
-                  </Carousel.Slide>
-                ))
-              )}
-            </Carousel>
           </div>
         ))}
       </SimpleGrid>
