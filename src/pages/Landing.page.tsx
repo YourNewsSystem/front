@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown';
-import { Box, Container, Grid, List, Paper, SimpleGrid } from '@mantine/core';
+import { Box, Container, Grid, List, Loader, Paper, SimpleGrid } from '@mantine/core';
 import { NewsCategory, NewsListProps } from '@/Api/Api';
 import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
@@ -15,8 +15,13 @@ export function LandingPage() {
   function NewsList({ category = 'politic', start = 0, end = 10, view = 'list' }: NewsListProps) {
     const { data, loading, error } = useNews(category);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading news</div>;
+    if (loading) {
+      return <Loader color="red" size="sm" type="bars" />;
+    }
+
+    if (error) {
+      return <div>Error loading news</div>;
+    }
 
     const items = data.items.slice(start, end);
 
@@ -74,8 +79,13 @@ export function LandingPage() {
   function NewsDesc({ category }: { category: NewsCategory }) {
     const { data, loading, error } = useNews(category);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading news</div>;
+    if (loading) {
+      return <Loader color="red" size="sm" type="bars" />;
+    }
+
+    if (error) {
+      return <div>Error loading news</div>;
+    }
 
     return <Markdown>{data.description?.body}</Markdown>;
   }
@@ -83,7 +93,7 @@ export function LandingPage() {
   return (
     <>
       <TopHeader />
-      <Container fluid p={'sm'}>
+      <Container p="sm" fluid>
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
             <Box>
@@ -105,7 +115,7 @@ export function LandingPage() {
         </Paper>
       </Container>
 
-      <Container fluid mt={'md'}>
+      <Container fluid mt="md">
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
             <Grid gutter="md">
@@ -127,7 +137,7 @@ export function LandingPage() {
         </Paper>
       </Container>
 
-      <Container fluid mt={'md'}>
+      <Container fluid mt="md">
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
             <Box>
@@ -149,7 +159,7 @@ export function LandingPage() {
         </Paper>
       </Container>
 
-      <Container fluid mt={'md'}>
+      <Container fluid mt="md">
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 12, sm: 2 }} spacing="md">
             <Box>
@@ -171,7 +181,7 @@ export function LandingPage() {
         </Paper>
       </Container>
 
-      <Container fluid mt={'md'}>
+      <Container fluid mt="md">
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
             <Grid gutter="md">
@@ -193,7 +203,7 @@ export function LandingPage() {
         </Paper>
       </Container>
 
-      <Container fluid mt={'md'}>
+      <Container fluid mt="md">
         <Paper shadow="xl" radius="xs" p="xl">
           <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
             <Box>

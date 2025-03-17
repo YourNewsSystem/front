@@ -1,4 +1,4 @@
-interface ServiceAI {
+export interface ServiceAI {
   id: number;
   date?: string;
   category?: string;

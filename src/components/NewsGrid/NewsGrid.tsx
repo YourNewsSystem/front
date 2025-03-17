@@ -3,16 +3,12 @@ import { IconBlockquote, IconBuildingBroadcastTower } from '@tabler/icons-react'
 import axios from 'axios';
 import Markdown from 'react-markdown';
 import { Carousel } from '@mantine/carousel';
-import {
-  Blockquote,
-  Divider,
-  ScrollArea,
-  SimpleGrid,
-  Text,
-} from '@mantine/core';
+import { Blockquote, Divider, ScrollArea, SimpleGrid, Text } from '@mantine/core';
 import ArticleImageCard from '../ArticleCard/ArticleImageCard';
 
 import '@mantine/carousel/styles.css';
+
+import moment from 'moment-jalaali';
 
 interface NewsItem {
   source: string;
@@ -115,10 +111,12 @@ const NewsGrid = () => {
         mt="xs"
         p="xs"
       >
-        <ScrollArea h={400} scrollbarSize={8} scrollbars="y">
+        <Text c={'gray'} ta={'left'} size="xs">
+          {moment(item.newsletterData.created_at).format('jYYYY/jM/jD')}
+        </Text>
+        <ScrollArea h={400} scrollbarSize={8} scrollbars="y" type="always">
           <Markdown>{item.newsletterData.body}</Markdown>
         </ScrollArea>
-        <time>{new Date(item.newsletterData.created_at).toLocaleDateString()}</time>
       </Blockquote>
     </Carousel.Slide>
   ));
@@ -143,17 +141,19 @@ const NewsGrid = () => {
               {new URL(feed.mainUrl).pathname.split('/')[2]}
             </Text>
             <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
-              <ScrollArea h={150} scrollbarSize={8} scrollbars="y">
+              <Text c={'gray'} ta={'left'} size="xs">
+                {moment(feed.newsletterData.updated_at).format('jYYYY/jM/jD')}
+              </Text>
+              <ScrollArea h={150} scrollbarSize={8} scrollbars="y" type="always">
                 <Markdown>{feed.newsletterData.podcast}</Markdown>
               </ScrollArea>
-              <time>{new Date(feed.newsletterData.updated_at).toLocaleDateString()}</time>
             </Blockquote>
             <Carousel
               slideSize="70%"
               height={300}
               slideGap="xl"
               controlsOffset="xs"
-              controlSize={40}
+              controlSize={20}
               loop
             >
               {typeof feed.mainData === 'string' ? (

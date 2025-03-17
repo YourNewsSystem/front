@@ -5,6 +5,8 @@ import ArticleCard from '@/components/ArticleCard/ArticleCard';
 import ArticleImageCard from '@/components/ArticleCard/ArticleImageCard';
 import { TopHeader } from '@/components/TopHeader/TopHeader';
 import { TopWelcome } from '@/components/Welcome/Welcome';
+import { ServiceAI } from '@/types/ServiceAI';
+import { ServiceItem } from '@/types/ServiceItem';
 
 interface ServicePageProps {
   title: string;
@@ -36,8 +38,13 @@ const ServicePage: React.FC<ServicePageProps> = ({ title, fetchData }) => {
     loadData();
   }, [fetchData]);
 
-  if (loading) return <Loader color="red" size="sm" type="bars" />;
-  if (error) return <div className="text-red-500">{error}</div>;
+  if (loading) {
+    return <Loader color="red" size="sm" type="bars" />;
+  }
+
+  if (error) {
+    return <div>Error loading news</div>;
+  }
 
   const getCategory = (categories: Array<string> | undefined): string => {
     return categories?.[1] ?? ' ';

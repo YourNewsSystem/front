@@ -14,7 +14,9 @@ const ArticleCard = ({
   crawlTimeMsec = '',
 }: ArticleCardProps) => {
   const convertTimestamp = (timestamp: string | undefined): number | null => {
-    if (!timestamp) return null;
+    if (!timestamp) {
+      return null;
+    }
     const numValue = parseInt(timestamp);
     return isNaN(numValue) ? null : numValue;
   };

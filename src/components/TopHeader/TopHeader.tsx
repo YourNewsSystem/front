@@ -81,7 +81,7 @@ export function TopHeader() {
             <item.icon size={22} color={theme.colors.blue[6]} />
           </ThemeIcon>
           <div>
-            <Text size="sm" fw={500} c={'dark'}>
+            <Text size="sm" fw={500} c="dark">
               {item.title}
             </Text>
             <Text size="xs" c="dimmed">

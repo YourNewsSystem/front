@@ -1,4 +1,8 @@
-import { IconBrandGithub, IconBrandTelegram, IconTicket } from '@tabler/icons-react';
+import {
+  IconBrandGithub,
+  IconBrandTelegram,
+  IconSquareRoundedCheckFilled,
+} from '@tabler/icons-react';
 import { ActionIcon, Container, Group, Image, Text } from '@mantine/core';
 import classes from './Footer.module.css';
 
@@ -68,7 +72,7 @@ export function Footer() {
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2025 JAI. All rights reserved.
+          از ۱۴۰۳ | جای.
         </Text>
 
         <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
@@ -79,7 +83,7 @@ export function Footer() {
             <IconBrandGithub size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <IconTicket size={18} stroke={1.5} />
+            <IconSquareRoundedCheckFilled size={18} />
           </ActionIcon>
         </Group>
       </Container>

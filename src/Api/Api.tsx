@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { ServiceAI } from '@/types/ServiceAI';
+import { ServiceItem } from '@/types/ServiceItem';
 
 // Constants
 const NEWS_CATEGORIES = ['social', 'economy', 'sport', 'culture', 'world', 'politic'] as const;

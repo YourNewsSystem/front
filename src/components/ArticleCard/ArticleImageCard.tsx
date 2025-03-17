@@ -1,6 +1,5 @@
-import { IconMessageCircle } from '@tabler/icons-react';
 import moment from 'moment-jalaali';
-import { Card, Center, Group, Text } from '@mantine/core';
+import { Avatar, Card, Group, Text } from '@mantine/core';
 import ArticleCardProps from '../../types/ArticleCardProps';
 import classes from './ArticleImageCard.module.css';
 
@@ -14,11 +13,15 @@ const ArticleImageCard = ({
   categories = '',
 }: ArticleCardProps) => {
   const convertTimestamp = (timestamp: string | undefined): number | null => {
-    if (!timestamp) return null;
+    if (!timestamp) {
+      return null;
+    }
     const numValue = parseInt(timestamp);
     return isNaN(numValue) ? null : numValue;
   };
   const processedCrawlTime = convertTimestamp(crawlTimeMsec);
+  const imageUrl = `https://yn.j-ai.ir/assets/images/logo/${origin}.png`;
+
   return (
     <Card
       p="lg"
@@ -38,26 +41,24 @@ const ArticleImageCard = ({
       <div className={classes.overlay} />
       <div className={classes.content}>
         <div>
-          <Text size="lg" className={classes.title} fw={500}>
+          <Text
+            size="lg"
+            className={classes.title}
+            fw={500}
+            component="a"
+            href={link}
+            target="_blank"
+          >
             {title}
           </Text>
           <Group justify="space-between" gap="xs">
-            <Text size="sm" className={classes.author}>
-              {origin}
+            <Avatar src={imageUrl} alt={origin} size={'sm'} />
+            <Text size="sm" className={classes.bodyText}>
+              {categories}
             </Text>
-            <Group gap="lg">
-              <Center>
-                <Text size="sm" className={classes.bodyText}>
-                  {categories}
-                </Text>
-              </Center>
-              <Center>
-                <IconMessageCircle size={16} stroke={1.5} color="dark" />
-                <Text size="sm" className={classes.bodyText}>
-                  {moment(processedCrawlTime).format('jYYYY/jM/jD')}
-                </Text>
-              </Center>
-            </Group>
+            <Text size="xs" className={classes.bodyText}>
+              {moment(processedCrawlTime).format('jYYYY/jM/jD')}
+            </Text>
           </Group>
         </div>
       </div>

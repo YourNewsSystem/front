@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NewsCategory, NewsService } from '@/Api/Api';
+import { ServiceAI } from '@/types/ServiceAI';
+import { ServiceItem } from '@/types/ServiceItem';
 
 // Hook implementation
 export function useNews(category: NewsCategory) {
