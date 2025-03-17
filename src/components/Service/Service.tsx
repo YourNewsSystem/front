@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import ServicePage from '@/pages/Service.page';
+import { ServiceItem } from '@/types/ServiceItem';
+import { ServiceAI } from '@/types/ServiceAI';
 
 const Politic: React.FC = () => {
   const cat = 'politic';
