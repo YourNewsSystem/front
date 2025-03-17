@@ -110,7 +110,7 @@ const NewsGrid = () => {
         mt="xs"
         p="xs"
       >
-        <Text c={'gray'} ta={'left'} size="xs">
+        <Text c="gray" ta="left" size="xs">
           {moment(item.newsletterData.created_at).format('jYYYY/jM/jD')}
         </Text>
         <ScrollArea h={400} scrollbarSize={8} scrollbars="y" type="always">
@@ -140,7 +140,7 @@ const NewsGrid = () => {
               {new URL(feed.mainUrl).pathname.split('/')[2]}
             </Text>
             <Blockquote color="blue" cite="پادکست" icon={podcast_icon} mt="xs" p="xs">
-              <Text c={'gray'} ta={'left'} size="xs">
+              <Text c="gray" ta="left" size="xs">
                 {moment(feed.newsletterData.updated_at).format('jYYYY/jM/jD')}
               </Text>
               <ScrollArea h={150} scrollbarSize={8} scrollbars="y" type="always">

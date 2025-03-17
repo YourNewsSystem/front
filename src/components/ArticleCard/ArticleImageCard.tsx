@@ -52,7 +52,7 @@ const ArticleImageCard = ({
             {title}
           </Text>
           <Group justify="space-between" gap="xs">
-            <Avatar src={imageUrl} alt={origin} size={'sm'} />
+            <Avatar src={imageUrl} alt={origin} size="sm" />
             <Text size="sm" className={classes.bodyText}>
               {categories}
             </Text>
